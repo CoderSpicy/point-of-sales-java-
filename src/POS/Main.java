@@ -19,21 +19,49 @@ public class Main {
         }
     }
 
-    private static void CategorySelection(int user, Scanner scan) {
+    static void CategorySelection(int user, Scanner scan) {
         switch (user) {
             case 1:
                 int choice = Input.Categories(scan);
-                ProductSelection(choice, scan);
-                break;
+                if (choice == 0) {
+                    MainMenu(scan);
+                    switch (user) {
+                        case 1:
+                            CategorySelection(user, scan);
+                            break;
+                        default:
+                            throw new IllegalStateException("Unexpected value: " + user);
+                    }
+                } else {
+                    ProductSelection(choice, scan);
+                    break;
+                }
             default:
                 throw new IllegalStateException("Unexpected value: " + user);
         }
     }
 
-
-
     private static void ProductSelection(int choice, Scanner scan) {
         Display.CategoriesBanner(choice, scan);
-        Display.Product(choice, scan);
+
+        int productChoice = Input.Product(choice, scan);
+
+        if (productChoice == 0) {
+            CategorySelection(1, scan);
+        } else {
+            int count = 0;
+            for (int i = 0; i < Product.products.length; i++) {
+                if (choice == Product.products[i].categoriesId) {
+                    count++;
+                    if (count == productChoice) {
+                        int quantity = Input.Quantity(scan);
+                        System.out.println("------------------------------");
+                        Display.Confirmation(Product.products[i], quantity, scan);
+
+                        break;
+                    }
+                }
+            }
+        }
     }
 }

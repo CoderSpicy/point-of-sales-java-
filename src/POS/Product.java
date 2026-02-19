@@ -4,7 +4,7 @@ public class Product {
     int id;
     String name;
     double price;
-    int categoriesId;
+    public int categoriesId;
 
     Product(int id, String name, double price, int categoriesId){
         this.id = id;
@@ -13,7 +13,7 @@ public class Product {
         this.categoriesId = categoriesId;
     }
 
-    static Product[] products = {
+    public static Product[] products = {
             //Breakfast (1)
             new Product(1, "Ham and Cheese Omelette", 220.0, 1),
             new Product(2, "Nutella Stuffed Pancakes", 150.0, 1),

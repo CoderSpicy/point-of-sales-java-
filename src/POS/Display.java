@@ -1,8 +1,11 @@
 package POS;
 
+import POS.System.Input;
+
 import java.util.Scanner;
 
 import static POS.Categories.categories;
+import static POS.Main.CategorySelection;
 
 public class Display {
 
@@ -30,10 +33,35 @@ public class Display {
     }
 
     public static void Product(int user, Scanner scan) {
+        int productNumber = 1;
         for (int i = 0; i < Product.products.length; i++) {
             if (user == Product.products[i].categoriesId) {
-                System.out.println((i + 1) + ". " + Product.products[i].name + " - " + Product.products[i].price);
+                System.out.println(productNumber + ". " + Product.products[i].name + " - " + Product.products[i].price);
+                productNumber++;
             }
         }
+    }
+
+    public static void Confirmation(Product product, int quantity, Scanner scan) {
+
+        System.out.println("Product: " + product.name);
+        System.out.println("Quantity: " + quantity);
+        System.out.println("Total Price: " + product.price * quantity);
+        System.out.println("------------------------------");
+        System.out.println("Are you sure you want to add this to your order?");
+        System.out.println("1. Yes");
+        System.out.println("2. No");
+
+        int confirmation = Input.Confirmation(scan);
+
+        if (confirmation == 1) {
+            System.out.println("Added to cart!");
+            CategorySelection(1, scan);
+        }
+        else{
+            System.out.println("Order cancelled.");
+            CategorySelection(1, scan);
+        }
+
     }
 }
