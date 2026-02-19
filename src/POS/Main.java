@@ -9,35 +9,33 @@ public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        MainMenu(scan);
-        switch (user) {
-            case 1:
-                CategorySelection(user, scan);
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + user);
+        boolean running = true;
+        while (running) {
+                MainMenu(scan);
+                switch (user) {
+                    case 1 -> CategorySelection(user, scan);
+                    case 2 -> Display.ViewOrder(scan);
+                    case 3 -> System.out.println("Checkout");
+                    case 4 -> {
+                        System.out.println("Exit");
+                        running = false;
+                    }
+                    default -> throw new IllegalStateException("Unexpected value: " + user);
+                }
         }
     }
 
     static void CategorySelection(int user, Scanner scan) {
         switch (user) {
-            case 1:
+            case 1 -> {
                 int choice = Input.Categories(scan);
                 if (choice == 0) {
-                    MainMenu(scan);
-                    switch (user) {
-                        case 1:
-                            CategorySelection(user, scan);
-                            break;
-                        default:
-                            throw new IllegalStateException("Unexpected value: " + user);
-                    }
+                    return;
                 } else {
                     ProductSelection(choice, scan);
-                    break;
                 }
-            default:
-                throw new IllegalStateException("Unexpected value: " + user);
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + user);
         }
     }
 

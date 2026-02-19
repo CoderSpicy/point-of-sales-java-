@@ -130,5 +130,47 @@ public class Input {
 
         return user;
     }
+
+    public static int CartOption(Scanner scan){
+        int user = 0;
+
+        do{
+            try{
+                System.out.print("Select an option: ");
+                user = scan.nextInt();
+
+                if (user < 1 || user > 4) {
+                    System.out.println("Invalid choice. Try again.");
+                }
+
+            } catch (Exception e) {
+                System.out.println("Numbers only.");
+                scan.nextLine();
+            }
+        }while (user < 1 || user > 4);
+
+        return user;
+    }
+
+    public static int RemoveItem(Scanner scan){
+        int user = -1;
+
+        do{
+            try{
+                System.out.print("Enter item number to remove (or 0 to go back): ");
+                user = scan.nextInt();
+
+                if (user < 0 || user > Cart.productName.size()) {
+                    System.out.println("Invalid choice. Try again.");
+                }
+
+            } catch (Exception e) {
+                System.out.println("Numbers only.");
+                scan.nextLine();
+            }
+        }while (user < 0 || user > Cart.productName.size());
+
+        return user;
+    }
 }
 
