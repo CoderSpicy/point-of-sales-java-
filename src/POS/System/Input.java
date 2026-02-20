@@ -42,7 +42,7 @@ public class Input {
                 System.out.print("Enter a number to proceed (or 0 to go back): ");
                 user = scan.nextInt();
 
-                if (user < 1 || user > 6) {
+                if (user < 0 || user > 6) {
                     System.out.println("Invalid choice. Try again.");
                 }
 
@@ -81,7 +81,7 @@ public class Input {
                 }
 
             } catch (Exception e) {
-                System.out.println("Numbers only.");
+                System.out.println("Please enter integers only.");
                 scan.nextLine();
             }
         }while (user < 0 || user > productCount);
@@ -102,7 +102,7 @@ public class Input {
                 }
 
             } catch (Exception e) {
-                System.out.println("Numbers only.");
+                System.out.println("Please enter integers only.");
                 scan.nextLine();
             }
         }while (quantity < 1);
@@ -123,7 +123,7 @@ public class Input {
                 }
 
             } catch (Exception e) {
-                System.out.println("Numbers only.");
+                System.out.println("Please enter integers only.");
                 scan.nextLine();
             }
         }while (user < 1 || user > 2);
@@ -144,7 +144,7 @@ public class Input {
                 }
 
             } catch (Exception e) {
-                System.out.println("Numbers only.");
+                System.out.println("Please enter integers only.");
                 scan.nextLine();
             }
         }while (user < 1 || user > 4);
@@ -165,12 +165,38 @@ public class Input {
                 }
 
             } catch (Exception e) {
-                System.out.println("Numbers only.");
+                System.out.println("Please enter integers only.");
                 scan.nextLine();
             }
         }while (user < 0 || user > Cart.productName.size());
 
         return user;
+    }
+
+    public static double Transaction(Scanner scan){
+        Cart.cash = 0;
+
+        do{
+            try{
+                Display.Transaction();
+                Cart.cash = scan.nextDouble();
+
+                if(Cart.cash == 0){
+                    Display.ViewOrder(scan);
+                }
+                else if (Cart.cash < Cart.total){
+                    System.out.println("You do not have sufficient funds to complete this transaction.");
+                    Cart.cash = 0;
+                }
+
+            } catch (Exception e) {
+                System.out.println("Please enter a valid amount of cash");
+                scan.nextLine();
+                Cart.cash = 0;
+            }
+        } while (Cart.cash < Cart.total);
+
+        return Cart.cash;
     }
 }
 

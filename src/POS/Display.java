@@ -2,11 +2,9 @@ package POS;
 
 import POS.System.Cart;
 import POS.System.Input;
-
 import java.util.Scanner;
 
 import static POS.Categories.categories;
-import static POS.Main.CategorySelection;
 
 public class Display {
 
@@ -14,8 +12,7 @@ public class Display {
         System.out.println("-------\"Main Menu\"-------");
         System.out.println("1. Add order");
         System.out.println("2. View order");
-        System.out.println("3. Checkout");
-        System.out.println("4. Exit");
+        System.out.println("3. Exit");
     }
 
     public static void Categories(){
@@ -71,7 +68,7 @@ public class Display {
         System.out.println("1. Remove item");
         System.out.println("2. Clear cart");
         System.out.println("3. Checkout");
-        System.out.println("4. Go back");
+        System.out.println("4. back");
 
 
         int option = Input.CartOption(scan);
@@ -87,27 +84,124 @@ public class Display {
                     ViewOrder(scan);
                 }
             }
-            case 2 -> System.out.println(2);
-            case 3 -> System.out.println("Checkout");
-            case 4 -> System.out.println("Returning to main menu.");
+            case 2 -> {
+                ConfirmClear();
+                int choice = Input.Confirmation(scan);
+
+                if (choice == 1){
+                    Cart.ClearItem();
+                    ClearItem();
+                } else {
+                    System.out.println("Clear cancelled. Returning to order view.");
+                    ViewOrder(scan);
+                }
+            }
+            case 3 -> {
+                ConfirmationChechout();
+                int choice = Input.Confirmation(scan);
+                if (choice == 1){
+                    Input.Transaction(scan);
+                    Reciept(scan);
+                } else {
+                    System.out.println("Checkout cancelled. Returning to order view.");
+                    ViewOrder(scan);
+                }
+            }
+            case 4 -> {
+                System.out.println("Returning to main menu.");
+                return;
+            }
             default -> System.out.println("Invalid option. Returning to main menu.");
         }
 
     }
 
     public static void ViewOrder(Scanner scan) {
-        int total = 0;
         System.out.println("-------\"Your Order\"-------");
+        Cart.total = 0;
         for (int i = 0; i < Cart.productName.size(); i++) {
-            System.out.println((i + 1) + ". " + Cart.productName.get(i) + " - " + Cart.quantity.get(i) + " - " + Cart.price.get(i));
-            total += (Cart.quantity.get(i) * Cart.price.get(i));
+            System.out.println((i + 1) + ". " + Cart.productName.get(i) + " - ₱" + Cart.price.get(i) + " (" + Cart.quantity.get(i) + ") - ₱" + (Cart.quantity.get(i) * Cart.price.get(i)));
+            Cart.total += (Cart.quantity.get(i) * Cart.price.get(i));
         }
         if (!Cart.productName.isEmpty()) {
-            System.out.println("Total: " + total);
+            System.out.println("Total: " + Cart.total);
             CartOption(scan);
         } else {
             System.out.println("Your order is empty.");
         }
+    }
 
+    public static void ConfirmClear(){
+        System.out.println("Are you sure you want to clear all orders?");
+        System.out.println("1. Yes");
+        System.out.println("2. No");
+    }
+
+    public static void ClearItem(){
+        System.out.println("------------------------------");
+        System.out.println("All orders have been cleared!");
+    }
+
+    static void CategorySelection(int user, Scanner scan) {
+        switch (user) {
+            case 1 -> {
+                int choice = Input.Categories(scan);
+                if (choice == 0) {
+                    return;
+                } else {
+                    ProductSelection(choice, scan);
+                }
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + user);
+        }
+    }
+
+    static void ProductSelection(int choice, Scanner scan) {
+        Display.CategoriesBanner(choice, scan);
+
+        int productChoice = Input.Product(choice, scan);
+
+        if (productChoice == 0) {
+            CategorySelection(1, scan);
+        } else {
+            int count = 0;
+            for (int i = 0; i < Product.products.length; i++) {
+                if (choice == Product.products[i].categoriesId) {
+                    count++;
+                    if (count == productChoice) {
+                        int quantity = Input.Quantity(scan);
+                        System.out.println("------------------------------");
+                        Display.Confirmation(Product.products[i], quantity, scan);
+
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    public static void ConfirmationChechout(){
+        System.out.println("-------\"Checkout\"-------");
+        System.out.println("Would you like to proceed with checkout?");
+        System.out.println("1. Yes");
+        System.out.println("2. No");
+    }
+
+    public static void Transaction(){
+        System.out.print("Please enter the cash payment amount. (Enter 0 to cancel): ");
+    }
+
+    static void Reciept(Scanner scan){
+        System.out.println("-------\"Reciept\"-------");
+        for (int i = 0; i < Cart.productName.size(); i++) {
+            System.out.println((i + 1) + ". " + Cart.productName.get(i) + " - " + Cart.quantity.get(i) + " - " + Cart.price.get(i));
+        }
+        System.out.println("Total: " + Cart.total);
+
+        if (Cart.cash > Cart.total) {
+            System.out.println("Change: " + (Cart.Change(scan)));
+        }
+        System.out.println("Thank you for your purchase!");
+        Cart.ClearItem();
     }
 }

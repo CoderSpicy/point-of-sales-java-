@@ -7,6 +7,9 @@ public class Cart {
     public static ArrayList<String> productName = new ArrayList<>();
     public static ArrayList<Integer> quantity = new ArrayList<>();
     public static ArrayList<Double> price = new ArrayList<>();
+    public static double cash = 0;
+    public static double total = 0;
+
 
     public static void addToCart(String name, int quantity, double price) {
         Cart.productName.add(name);
@@ -22,5 +25,16 @@ public class Cart {
         } else {
             System.out.println("Invalid item index.");
         }
+    }
+
+    public static void ClearItem(){
+        productName.clear();
+        quantity.clear();
+        price.clear();
+        total = 0;
+    }
+
+    public static double Change(Scanner scan){
+        return cash - total;
     }
 }
