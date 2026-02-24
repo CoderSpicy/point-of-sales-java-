@@ -52,6 +52,13 @@ public class Product {
             new Product(5, "Chicharon Bulaklak A La Carte", 133.0, 5),
             new Product(6, "Grilled Octopus", 266.0, 5),
             new Product(7, "Boneless Chicken", 169.0, 5),
-            //Beverages (6)
+            //Drinks (6)
+            new Product(1, "Orange Juice", 100.0, 6),
+            new Product(2, "Apple Juice", 100.0, 6),
+            new Product(3, "Strawberry Juice", 100.0, 6),
+            new Product(4, "Guyabano Juice", 100.0, 6),
+            new Product(5, "Bottled Water", 40.0, 6),
+            new Product(6, "Fresh Lemonade", 100.0, 6),
+
     };
 }

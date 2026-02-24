@@ -15,7 +15,7 @@ public class Categories {
             new Categories(3, "Dessert"),
             new Categories(4, "Snacks"),
             new Categories(5, "Appetizers"),
-            new Categories(6, "Beverages")
+            new Categories(6, "Drinks")
 
     };
 }
