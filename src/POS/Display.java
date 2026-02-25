@@ -2,6 +2,8 @@ package POS;
 
 import POS.System.Cart;
 import POS.System.Input;
+
+import javax.swing.text.View;
 import java.util.Scanner;
 
 import static POS.Categories.categories;
@@ -79,6 +81,13 @@ public class Display {
                 if (itemNumber == 0) {
                     ViewOrder(scan);
                 } else {
+                    ConfirmationRemoveItem(itemNumber);
+                    int choice = Input.Confirmation(scan);
+                    if (choice == 2) {
+                        System.out.println("Item removal cancelled. Returning to order view.");
+                        ViewOrder(scan);
+                        return;
+                    }
                     Cart.RemoveItem(itemNumber - 1);
                     System.out.println("Item removed.");
                     ViewOrder(scan);
@@ -99,9 +108,14 @@ public class Display {
             case 3 -> {
                 ConfirmationChechout();
                 int choice = Input.Confirmation(scan);
+
                 if (choice == 1){
-                    Input.Transaction(scan);
-                    Reciept(scan);
+                    double paid = Input.Transaction(scan);
+                    if (paid == 0){
+                        System.out.println("Checkout cancelled. Returning to order view.");
+                    } else {
+                        Reciept(scan);
+                    }
                 } else {
                     System.out.println("Checkout cancelled. Returning to order view.");
                     ViewOrder(scan);
@@ -203,5 +217,12 @@ public class Display {
         }
         System.out.println("Thank you for your purchase!");
         Cart.ClearItem();
+    }
+
+    static void ConfirmationRemoveItem(int index){
+        index = index - 1;
+        System.out.println("Are you sure you want to remove " + Cart.productName.get(index) + " from your order?");
+        System.out.println("1. Yes");
+        System.out.println("2. No");
     }
 }

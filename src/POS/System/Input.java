@@ -182,7 +182,7 @@ public class Input {
                 Cart.cash = scan.nextDouble();
 
                 if(Cart.cash == 0){
-                    Display.ViewOrder(scan);
+                    return 0;
                 }
                 else if (Cart.cash < Cart.total){
                     System.out.println("You do not have sufficient funds to complete this transaction.");
