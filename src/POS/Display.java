@@ -213,7 +213,7 @@ public class Display {
         System.out.println("Total: " + Cart.total);
 
         if (Cart.cash > Cart.total) {
-            System.out.println("Change: " + (Cart.Change(scan)));
+            System.out.println("Change: " + (Cart.Change()));
         }
         System.out.println("Thank you for your purchase!");
         Cart.ClearItem();

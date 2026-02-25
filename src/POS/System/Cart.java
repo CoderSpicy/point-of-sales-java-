@@ -34,7 +34,7 @@ public class Cart {
         total = 0;
     }
 
-    public static double Change(Scanner scan){
+    public static double Change(){
         return cash - total;
     }
 }

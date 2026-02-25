@@ -1,5 +1,6 @@
 package POS.System;
 
+import POS.Categories;
 import POS.Display;
 import POS.Product;
 
@@ -42,7 +43,7 @@ public class Input {
                 System.out.print("Enter a number to proceed (or 0 to go back): ");
                 user = scan.nextInt();
 
-                if (user < 0 || user > 6) {
+                if (user < 0 || user > Categories.categories.length) {
                     System.out.println("Invalid choice. Try again.");
                 }
 
