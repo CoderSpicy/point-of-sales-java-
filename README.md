@@ -1,5 +1,1 @@
-﻿# point-of-sales-java-
-Missing features:
--beverages (On working)
--database (idk how)
--record (implement database before this)
+
