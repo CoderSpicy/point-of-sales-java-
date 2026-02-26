@@ -22,7 +22,7 @@ public class Input {
                 System.out.print("Enter a number to proceed: ");
                 user = scan.nextInt();
 
-                if (user < 1 || user > 4) {
+                if (user < 1 || user > 3) {
                     System.out.println("Invalid choice. Try again.");
                 }
 
@@ -30,7 +30,7 @@ public class Input {
                 System.out.println("Numbers only.");
                 scan.nextLine();
             }
-        }while (user < 1 || user > 4);
+        }while (user < 1 || user > 3);
 
     }
 

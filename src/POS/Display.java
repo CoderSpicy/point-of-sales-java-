@@ -20,7 +20,7 @@ public class Display {
     public static void Categories(){
         System.out.println("-------\"Categories\"-------");
         for (int i = 0; i < categories.length; i++){
-            System.out.println((i + 1) + ". " + categories[i].name);
+            System.out.println("[" + (i + 1) + "] " + categories[i].name);
         }
     }
 
@@ -36,7 +36,7 @@ public class Display {
         int productNumber = 1;
         for (int i = 0; i < Product.products.length; i++) {
             if (user == Product.products[i].categoriesId) {
-                System.out.println(productNumber + ". " + Product.products[i].name + " - " + Product.products[i].price);
+                System.out.println("[" + productNumber + "] " + Product.products[i].name + " ₱" + Product.products[i].price);
                 productNumber++;
             }
         }
@@ -46,7 +46,7 @@ public class Display {
 
         System.out.println("Product: " + product.name);
         System.out.println("Quantity: " + quantity);
-        System.out.println("Total Price: " + product.price * quantity);
+        System.out.println("Total Price: ₱" + product.price * quantity);
         System.out.println("------------------------------");
         System.out.println("Are you sure you want to add this to your order?");
         System.out.println("1. Yes");
@@ -134,7 +134,7 @@ public class Display {
         System.out.println("-------\"Your Order\"-------");
         Cart.total = 0;
         for (int i = 0; i < Cart.productName.size(); i++) {
-            System.out.println((i + 1) + ". " + Cart.productName.get(i) + " - ₱" + Cart.price.get(i) + " (" + Cart.quantity.get(i) + ") - ₱" + (Cart.quantity.get(i) * Cart.price.get(i)));
+            System.out.println((i + 1) + ". " + Cart.productName.get(i) + " ₱" + Cart.price.get(i) + " (" + Cart.quantity.get(i) + ") Total of ₱" + (Cart.quantity.get(i) * Cart.price.get(i)));
             Cart.total += (Cart.quantity.get(i) * Cart.price.get(i));
         }
         if (!Cart.productName.isEmpty()) {

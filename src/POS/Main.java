@@ -18,7 +18,6 @@ public class Main {
                         System.out.println("Exit");
                         running = false;
                     }
-                    default -> throw new IllegalStateException("Unexpected value: " + user);
                 }
         }
     }
