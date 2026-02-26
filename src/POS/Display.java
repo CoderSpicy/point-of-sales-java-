@@ -2,7 +2,6 @@ package POS;
 
 import POS.System.Cart;
 import POS.System.Input;
-
 import java.util.Scanner;
 
 import static POS.Categories.categories;
@@ -24,9 +23,9 @@ public class Display {
     }
 
     public static void CategoriesBanner(int user, Scanner scan) {
-        for (int i = 0; i < categories.length; i++) {
-            if (user == categories[i].id) {
-                System.out.println("-------\"" + categories[i].name + "\"-------");
+        for (Categories category : categories) {
+            if (user == category.id) {
+                System.out.println("-------\"" + category.name + "\"-------");
             }
         }
     }
