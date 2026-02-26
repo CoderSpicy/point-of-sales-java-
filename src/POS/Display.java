@@ -3,7 +3,6 @@ package POS;
 import POS.System.Cart;
 import POS.System.Input;
 
-import javax.swing.text.View;
 import java.util.Scanner;
 
 import static POS.Categories.categories;
@@ -106,7 +105,7 @@ public class Display {
                 }
             }
             case 3 -> {
-                ConfirmationChechout();
+                ConfirmationCheckout();
                 int choice = Input.Confirmation(scan);
 
                 if (choice == 1){
@@ -114,7 +113,7 @@ public class Display {
                     if (paid == 0){
                         System.out.println("Checkout cancelled. Returning to order view.");
                     } else {
-                        Reciept(scan);
+                        Receipt(scan);
                     }
                 } else {
                     System.out.println("Checkout cancelled. Returning to order view.");
@@ -194,7 +193,7 @@ public class Display {
         }
     }
 
-    public static void ConfirmationChechout(){
+    public static void ConfirmationCheckout(){
         System.out.println("-------\"Checkout\"-------");
         System.out.println("Would you like to proceed with checkout?");
         System.out.println("1. Yes");
@@ -205,8 +204,8 @@ public class Display {
         System.out.print("Please enter the cash payment amount. (Enter 0 to cancel): ");
     }
 
-    static void Reciept(Scanner scan){
-        System.out.println("-------\"Reciept\"-------");
+    static void Receipt(Scanner scan){
+        System.out.println("-------\"Receipt\"-------");
         for (int i = 0; i < Cart.productName.size(); i++) {
             System.out.println((i + 1) + ". " + Cart.productName.get(i) + " - " + Cart.quantity.get(i) + " - " + Cart.price.get(i));
         }

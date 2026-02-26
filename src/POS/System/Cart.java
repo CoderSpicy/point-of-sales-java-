@@ -1,7 +1,6 @@
 package POS.System;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Cart {
     public static ArrayList<String> productName = new ArrayList<>();
