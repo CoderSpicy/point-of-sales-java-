@@ -22,7 +22,7 @@ public class Display {
         }
     }
 
-    public static void CategoriesBanner(int user, Scanner scan) {
+    public static void CategoriesBanner(int user) {
         for (Categories category : categories) {
             if (user == category.id) {
                 System.out.println("-------\"" + category.name + "\"-------");
@@ -30,11 +30,11 @@ public class Display {
         }
     }
 
-    public static void Product(int user, Scanner scan) {
+    public static void Product(int user) {
         int productNumber = 1;
         for (int i = 0; i < Product.products.length; i++) {
             if (user == Product.products[i].categoriesId) {
-                System.out.println("[" + productNumber + "] " + Product.products[i].name + " ₱" + Product.products[i].price);
+                System.out.println("[" + productNumber + "] " + Product.products[i].name + "\t₱" + Product.products[i].price);
                 productNumber++;
             }
         }
@@ -58,7 +58,7 @@ public class Display {
             CategorySelection(1, scan);
         }
         else{
-            System.out.println("Order cancelled.");
+            System.out.println("Order canceled.");
             CategorySelection(1, scan);
         }
     }
@@ -155,25 +155,23 @@ public class Display {
     }
 
     static void CategorySelection(int user, Scanner scan) {
-        switch (user) {
-            case 1 -> {
-                int choice = Input.Categories(scan);
-                if (choice == 0) {
-                    return;
-                } else {
-                    ProductSelection(choice, scan);
-                }
+        if (user == 1) {
+            int choice = Input.Categories(scan);
+            if (choice == 0) {
+                System.out.println("Returning to main menu.");
+            } else {
+                ProductSelection(choice, scan);
             }
-            default -> throw new IllegalStateException("Unexpected value: " + user);
         }
     }
 
     static void ProductSelection(int choice, Scanner scan) {
-        Display.CategoriesBanner(choice, scan);
+        Display.CategoriesBanner(choice);
 
         int productChoice = Input.Product(choice, scan);
 
         if (productChoice == 0) {
+            System.out.println("Returning to categories.");
             CategorySelection(1, scan);
         } else {
             int count = 0;
@@ -184,7 +182,6 @@ public class Display {
                         int quantity = Input.Quantity(scan);
                         System.out.println("------------------------------");
                         Display.Confirmation(Product.products[i], quantity, scan);
-
                         break;
                     }
                 }

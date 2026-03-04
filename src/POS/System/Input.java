@@ -16,7 +16,6 @@ public class Input {
     public static void MainMenu(Scanner scan){
 
         Display.MainMenu();
-
         do{
             try{
                 System.out.print("Enter a number to proceed: ");
@@ -35,9 +34,8 @@ public class Input {
     }
 
     public static int Categories(Scanner scan){
-
         Display.Categories();
-
+        int user = -1;
         do{
             try{
                 System.out.print("Enter a number to proceed (or 0 to go back): ");
@@ -51,7 +49,7 @@ public class Input {
                 System.out.println("Numbers only.");
                 scan.nextLine();
             }
-        }while (user < 0 || user > 6);
+        }while (user < 0 || user > Categories.categories.length);
 
         return user;
     }
@@ -67,10 +65,10 @@ public class Input {
     }
 
     public static int Product(int categoryId, Scanner scan){
-        Display.Product(categoryId, scan);
+        Display.Product(categoryId);
 
         int productCount = countProducts(categoryId);
-        int user = 0;
+        int user = -1;
 
         do{
             try{
@@ -84,6 +82,7 @@ public class Input {
             } catch (Exception e) {
                 System.out.println("Please enter integers only.");
                 scan.nextLine();
+                user -= 1;
             }
         }while (user < 0 || user > productCount);
 
