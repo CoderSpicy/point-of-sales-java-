@@ -9,10 +9,6 @@ import java.util.Scanner;
 public class Input {
     public static int user;
 
-    Input(int user){
-        Input.user = user;
-    }
-
     public static void MainMenu(Scanner scan){
 
         Display.MainMenu();

@@ -3,7 +3,6 @@ package POS;
 import POS.System.Cart;
 import POS.System.Input;
 import java.util.Scanner;
-
 import static POS.Categories.categories;
 
 public class Display {
@@ -111,7 +110,7 @@ public class Display {
                     if (paid == 0){
                         System.out.println("Checkout cancelled. Returning to order view.");
                     } else {
-                        Receipt(scan);
+                        Receipt();
                     }
                 } else {
                     System.out.println("Checkout cancelled. Returning to order view.");
@@ -199,7 +198,7 @@ public class Display {
         System.out.print("Please enter the cash payment amount. (Enter 0 to cancel): ");
     }
 
-    static void Receipt(Scanner scan){
+    static void Receipt(){
         System.out.println("-------\"Receipt\"-------");
         for (int i = 0; i < Cart.productName.size(); i++) {
             System.out.println((i + 1) + ". " + Cart.productName.get(i) + " - " + Cart.quantity.get(i) + " - " + Cart.price.get(i));
