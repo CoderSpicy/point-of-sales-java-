@@ -7,7 +7,6 @@ import java.util.Scanner;
 import static POS.Categories.categories;
 
 public class Display {
-
     public static void MainMenu(){
         System.out.println("-------\"Main Menu\"-------");
         System.out.println("1. Add order");
@@ -219,5 +218,37 @@ public class Display {
         System.out.println("Are you sure you want to remove " + Cart.productName.get(index) + " from your order?");
         System.out.println("1. Yes");
         System.out.println("2. No");
+    }
+
+    public static void ConfirmationExit(Scanner scan){
+        if (!Cart.productName.isEmpty()) {
+            System.out.println("You have items in your cart. Are you sure you want to exit?");
+            System.out.println("1. Yes");
+            System.out.println("2. No");
+            int choice = Input.Confirmation(scan);
+
+            if (choice == 1) {
+                    System.out.println("Thanks you! Exiting the program.");
+                    Cart.ClearItem();
+                    Main.running = false;
+                } else {
+                    System.out.println("Exit cancelled. Returning to main menu.");
+                choice = -1;
+            }
+        } else {
+            System.out.println("Are you sure you want to exit?");
+            System.out.println("1. Yes");
+            System.out.println("2. No");
+            int choice = Input.Confirmation(scan);
+
+            if (choice == 1){
+                System.out.println("Thanks you! Exiting the program.");
+                Main.running = false;
+            } else {
+                System.out.println("Exit cancelled. Returning to main menu.");
+                choice = -1;
+            }
+        }
+
     }
 }

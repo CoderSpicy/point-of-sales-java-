@@ -26,7 +26,7 @@ public class Input {
                 }
 
             } catch (Exception e) {
-                System.out.println("Numbers only.");
+                System.out.println("Enter 'Numbers' only.");
                 scan.nextLine();
             }
         }while (user < 1 || user > 3);
@@ -46,7 +46,7 @@ public class Input {
                 }
 
             } catch (Exception e) {
-                System.out.println("Numbers only.");
+                System.out.println("Enter 'Numbers' only.");
                 scan.nextLine();
             }
         }while (user < 0 || user > Categories.categories.length);
@@ -80,7 +80,7 @@ public class Input {
                 }
 
             } catch (Exception e) {
-                System.out.println("Please enter integers only.");
+                System.out.println("Enter 'Numbers' only.");
                 scan.nextLine();
                 user -= 1;
             }
@@ -102,7 +102,7 @@ public class Input {
                 }
 
             } catch (Exception e) {
-                System.out.println("Please enter integers only.");
+                System.out.println("Enter 'Numbers' only.");
                 scan.nextLine();
             }
         }while (quantity < 1);
@@ -110,6 +110,7 @@ public class Input {
         return quantity;
     }
 
+    //1 - 2
     public static int Confirmation(Scanner scan){
         int user = 0;
 
@@ -123,7 +124,7 @@ public class Input {
                 }
 
             } catch (Exception e) {
-                System.out.println("Please enter integers only.");
+                System.out.println("Enter 'Numbers' only.");
                 scan.nextLine();
             }
         }while (user < 1 || user > 2);
@@ -144,7 +145,7 @@ public class Input {
                 }
 
             } catch (Exception e) {
-                System.out.println("Please enter integers only.");
+                System.out.println("Enter 'Numbers' only.");
                 scan.nextLine();
             }
         }while (user < 1 || user > 4);
@@ -165,7 +166,7 @@ public class Input {
                 }
 
             } catch (Exception e) {
-                System.out.println("Please enter integers only.");
+                System.out.println("Enter 'Numbers' only.");
                 scan.nextLine();
             }
         }while (user < 0 || user > Cart.productName.size());
@@ -185,12 +186,12 @@ public class Input {
                     return 0;
                 }
                 else if (Cart.cash < Cart.total){
-                    System.out.println("You do not have sufficient funds to complete this transaction.");
+                    System.out.println("Enter 'Numbers' only.");
                     Cart.cash = 0;
                 }
 
             } catch (Exception e) {
-                System.out.println("Please enter a valid amount of cash");
+                System.out.println("Enter 'Numbers' only.");
                 scan.nextLine();
                 Cart.cash = 0;
             }

@@ -3,9 +3,11 @@ package POS.System;
 import java.util.ArrayList;
 
 public class Cart {
+    // Stores customers order
     public static ArrayList<String> productName = new ArrayList<>();
     public static ArrayList<Integer> quantity = new ArrayList<>();
     public static ArrayList<Double> price = new ArrayList<>();
+
     public static double cash = 0;
     public static double total = 0;
 
